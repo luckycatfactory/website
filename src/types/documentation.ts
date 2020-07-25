@@ -31,8 +31,8 @@ export type AnySectionType =
   | RecipesSectionType
   | UsageSectionType
 
-interface BaseSection<T extends AnySectionType> {
-  readonly routeKey: string
+export interface BaseSection<T extends AnySectionType> {
+  readonly path: string
   readonly title: string
   readonly type: T
 }
@@ -66,7 +66,6 @@ export interface BaseSectionGroup<
   T extends SectionGroupType,
   U extends AnySection
 > {
-  readonly routeKey: string
   readonly sections: NonEmptyArray<U>
   readonly title: string
   readonly type: T
@@ -95,6 +94,6 @@ export type AnySectionGroup =
   | UsageSectionGroup
 
 export interface DocumentationConfiguration {
-  readonly routeKey: string
+  readonly path: string
   readonly sectionGroups: AnySectionGroup[]
 }

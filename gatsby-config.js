@@ -6,4 +6,4 @@ require("ts-node").register({
   },
 })
 
-module.exports = require("./data")
+module.exports = require("./config")

@@ -9,21 +9,16 @@ import {
 } from "../types"
 
 interface SectionProps {
-  readonly projectRouteKey: string
-  readonly routeKey: string
-  readonly sectionGroupRouteKey: string
+  readonly path: string
   readonly title: string
 }
 
 interface SectionGroupProps {
-  readonly projectRouteKey: string
-  readonly routeKey: string
   readonly sections: AnySection[]
   readonly title: string
 }
 
 interface DocumentationNavigationProps {
-  readonly routeKey: string
   readonly sectionGroups: AnySectionGroup[]
 }
 
@@ -32,51 +27,34 @@ interface DocumentationLayoutProps {
   readonly pathname: string
 }
 
-const Section = React.memo<SectionProps>(
-  ({ projectRouteKey, routeKey, sectionGroupRouteKey, title }) => {
-    const url = useMemo(
-      () => `/projects/${projectRouteKey}/${sectionGroupRouteKey}/${routeKey}`,
-      []
-    )
-
-    return (
-      <li>
-        <Link to={url}>{title}</Link>
-      </li>
-    )
-  }
-)
-
-const SectionGroup = React.memo<SectionGroupProps>(
-  ({ projectRouteKey, routeKey, sections, title }) => (
-    <div>
-      <h4>{title}</h4>
-      <ul>
-        {sections.map(section => (
-          <Section
-            key={section.title}
-            projectRouteKey={projectRouteKey}
-            routeKey={section.routeKey}
-            sectionGroupRouteKey={routeKey}
-            title={section.title}
-          />
-        ))}
-      </ul>
-    </div>
+const Section = React.memo<SectionProps>(({ path, title }) => {
+  return (
+    <li>
+      <Link to={path}>{title}</Link>
+    </li>
   )
-)
+})
+
+const SectionGroup = React.memo<SectionGroupProps>(({ sections, title }) => (
+  <div>
+    <h4>{title}</h4>
+    <ul>
+      {sections.map(section => (
+        <Section
+          key={section.title}
+          path={section.path}
+          title={section.title}
+        />
+      ))}
+    </ul>
+  </div>
+))
 
 const DocumentationNavigation = React.memo<DocumentationNavigationProps>(
-  ({ routeKey: projectRouteKey, sectionGroups }) => (
+  ({ sectionGroups }) => (
     <nav>
-      {sectionGroups.map(({ routeKey, sections, title }) => (
-        <SectionGroup
-          key={title}
-          projectRouteKey={projectRouteKey}
-          routeKey={routeKey}
-          sections={sections}
-          title={title}
-        />
+      {sectionGroups.map(({ sections, title }) => (
+        <SectionGroup key={title} sections={sections} title={title} />
       ))}
     </nav>
   )
@@ -105,7 +83,6 @@ const DocumentationLayout = React.memo<DocumentationLayoutProps>(
       >
         {configuration && (
           <DocumentationNavigation
-            routeKey={configuration.routeKey}
             sectionGroups={configuration.sectionGroups}
           />
         )}

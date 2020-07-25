@@ -10,7 +10,6 @@ const IndexPage = React.memo(() => (
     <h1>Wash your face of subpar software</h1>
     <p>@luckycatfactory offers high quality, open source software.</p>
     <Link to={"/projects"}>Projects</Link>
-    <h2>projects</h2>
   </>
 ))
 
