@@ -3,6 +3,8 @@ import { Link } from "gatsby"
 import { LG } from "@zendeskgarden/react-typography"
 import styled from "styled-components"
 
+import SEO from "../components/seo"
+
 import {
   AnySection,
   AnySectionGroup,
@@ -84,6 +86,7 @@ const DocumentationDivider = styled.div`
 const DocumentationLayout = React.memo<DocumentationLayoutProps>(
   ({ children, projectConfiguration }) => (
     <DocumentationDivider>
+      <SEO title={projectConfiguration.name} />
       {
         <DocumentationNavigation
           path={projectConfiguration.documentation.path}
