@@ -1,7 +1,13 @@
 import React from "react"
+import { Paragraph, XXXL } from "@zendeskgarden/react-typography"
 
-const BasicLogging = React.memo(() => {
-  return <div>BasicLogging</div>
-})
+import { DocumentationSection } from "../../../components/documentation"
+
+const BasicLogging = React.memo(() => (
+  <DocumentationSection>
+    <XXXL>Basic Logging</XXXL>
+    <Paragraph>Hello</Paragraph>
+  </DocumentationSection>
+))
 
 export default BasicLogging

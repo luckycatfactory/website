@@ -1,7 +1,13 @@
 import React from "react"
+import { Paragraph, XXXL } from "@zendeskgarden/react-typography"
 
-const Overview = React.memo(() => {
-  return <div>Overview</div>
-})
+import { DocumentationSection } from "../../../components/documentation"
+
+const Overview = React.memo(() => (
+  <DocumentationSection>
+    <XXXL>Overview</XXXL>
+    <Paragraph>Hello</Paragraph>
+  </DocumentationSection>
+))
 
 export default Overview

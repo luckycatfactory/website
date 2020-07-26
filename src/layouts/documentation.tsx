@@ -1,7 +1,14 @@
 import React from "react"
 import { Link } from "gatsby"
+import { LG } from "@zendeskgarden/react-typography"
+import styled from "styled-components"
 
-import { AnySection, AnySectionGroup, ProjectConfiguration } from "../types"
+import {
+  AnySection,
+  AnySectionGroup,
+  ProjectConfiguration,
+  AboutSectionType,
+} from "../types"
 
 interface SectionProps {
   readonly path: string
@@ -24,23 +31,25 @@ interface DocumentationLayoutProps {
   readonly projectConfiguration: ProjectConfiguration
 }
 
-const Section = React.memo<SectionProps>(({ path, title }) => {
-  return (
-    <li>
-      <Link to={path}>{title}</Link>
-    </li>
-  )
-})
+const Section = React.memo<SectionProps>(({ path, title }) => (
+  <li>
+    <Link to={path}>{title}</Link>
+  </li>
+))
 
 const SectionGroup = React.memo<SectionGroupProps>(
   ({ rootPath, sections, title }) => (
     <div>
-      <h4>{title}</h4>
+      <LG isBold>{title}</LG>
       <ul>
         {sections.map(section => (
           <Section
             key={section.title}
-            path={`${rootPath}${section.path}`}
+            path={
+              section.type === AboutSectionType.Overview
+                ? rootPath
+                : `${rootPath}${section.path}`
+            }
             title={section.title}
           />
         ))}
@@ -49,9 +58,13 @@ const SectionGroup = React.memo<SectionGroupProps>(
   )
 )
 
+const StyledNav = styled.nav`
+  width: 240px;
+`
+
 const DocumentationNavigation = React.memo<DocumentationNavigationProps>(
   ({ path, sectionGroups }) => (
-    <nav>
+    <StyledNav>
       {sectionGroups.map(({ sections, title }) => (
         <SectionGroup
           key={title}
@@ -60,24 +73,26 @@ const DocumentationNavigation = React.memo<DocumentationNavigationProps>(
           title={title}
         />
       ))}
-    </nav>
+    </StyledNav>
   )
 )
 
+const DocumentationDivider = styled.div`
+  display: flex;
+`
+
 const DocumentationLayout = React.memo<DocumentationLayoutProps>(
-  ({ children, projectConfiguration }) => {
-    return (
-      <>
-        {
-          <DocumentationNavigation
-            path={projectConfiguration.documentation.path}
-            sectionGroups={projectConfiguration.documentation.sectionGroups}
-          />
-        }
-        {children}
-      </>
-    )
-  }
+  ({ children, projectConfiguration }) => (
+    <DocumentationDivider>
+      {
+        <DocumentationNavigation
+          path={projectConfiguration.documentation.path}
+          sectionGroups={projectConfiguration.documentation.sectionGroups}
+        />
+      }
+      {children}
+    </DocumentationDivider>
+  )
 )
 
 export default DocumentationLayout

@@ -8,12 +8,13 @@
 import React from "react"
 import { ThemeProvider, DEFAULT_THEME } from "@zendeskgarden/react-theming"
 import { useStaticQuery, graphql } from "gatsby"
+import styled from "styled-components"
+import "@zendeskgarden/css-bedrock"
 
 import { ProjectConfiguration } from "../types"
 import DocumentationLayout from "./documentation"
 import Header from "../components/header"
 import Footer from "../components/footer"
-import "./layout.css"
 
 interface LayoutProps {
   readonly children: any
@@ -32,6 +33,21 @@ const titleQuery = graphql`
   }
 `
 
+const OuterContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+`
+
+const InnerContainer = styled.div`
+  flex: 1;
+  max-width: 1600px;
+`
+
+const StyledMain = styled.main`
+  flex: 1;
+`
+
 const Layout = React.memo<LayoutProps>(
   ({ children, pageContext: { projectConfiguration } }) => {
     const {
@@ -43,19 +59,31 @@ const Layout = React.memo<LayoutProps>(
 
     const mainToRender = isProject ? (
       <DocumentationLayout projectConfiguration={projectConfiguration}>
-        <main>{children}</main>
+        <StyledMain>{children}</StyledMain>
       </DocumentationLayout>
     ) : (
-      <main>{children}</main>
+      <StyledMain>{children}</StyledMain>
     )
 
     const siteTitleToUse = isProject ? projectConfiguration.name : title
 
+    const headerTo = isProject ? projectConfiguration.documentation.path : "/"
+
     return (
-      <ThemeProvider>
-        <Header siteTitle={siteTitleToUse} />
-        {mainToRender}
-        <Footer />
+      <ThemeProvider theme={DEFAULT_THEME}>
+        <OuterContainer>
+          <InnerContainer>
+            <Header siteTitle={siteTitleToUse} to={headerTo} />
+          </InnerContainer>
+        </OuterContainer>
+        <OuterContainer>
+          <InnerContainer>{mainToRender}</InnerContainer>
+        </OuterContainer>
+        <OuterContainer>
+          <InnerContainer>
+            <Footer />
+          </InnerContainer>
+        </OuterContainer>
       </ThemeProvider>
     )
   }

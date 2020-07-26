@@ -1,3 +1,5 @@
+import { AboutSectionType, SectionGroupType } from "./src/types"
+
 const titleToPath = (title: string) => title.toLowerCase().replace(" ", "-")
 
 exports.createPages = async ({ actions, graphql }) => {
@@ -32,8 +34,6 @@ exports.createPages = async ({ actions, graphql }) => {
     }
   `)
 
-  console.log("data", projects)
-
   projects.forEach(project => {
     actions.createPage({
       context: { projectConfiguration: project },
@@ -42,8 +42,14 @@ exports.createPages = async ({ actions, graphql }) => {
       ),
       path: project.documentation.path,
     })
+
     project.documentation.sectionGroups.forEach(sectionGroup => {
       sectionGroup.sections.forEach(section => {
+        if (
+          sectionGroup.title === SectionGroupType.About &&
+          section.type === AboutSectionType.Overview
+        )
+          return
         actions.createPage({
           context: { projectConfiguration: project },
           component: require.resolve(

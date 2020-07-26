@@ -1680,6 +1680,14 @@
   resolved "https://registry.yarnpkg.com/@types/history/-/history-4.7.6.tgz#ed8fc802c45b8e8f54419c2d054e55c9ea344356"
   integrity sha512-GRTZLeLJ8ia00ZH8mxMO8t0aC9M1N9bN461Z2eaRurJo6Fpa+utgCwLzI4jQHcrdzuzp5WPN9jRwpsCQ1VhJ5w==
 
+"@types/hoist-non-react-statics@*":
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/@types/hoist-non-react-statics/-/hoist-non-react-statics-3.3.1.tgz#1124aafe5118cb591977aeb1ceaaed1070eb039f"
+  integrity sha512-iMIqiko6ooLrTh1joXodJK5X9xeEALT1kM5G3ZLhD3hszxBdIEd5C75U834D9mLcINgD4OyZf5uQXjkuYydWvA==
+  dependencies:
+    "@types/react" "*"
+    hoist-non-react-statics "^3.3.0"
+
 "@types/http-proxy@^1.17.4":
   version "1.17.4"
   resolved "https://registry.yarnpkg.com/@types/http-proxy/-/http-proxy-1.17.4.tgz#e7c92e3dbe3e13aa799440ff42e6d3a17a9d045b"
@@ -1774,6 +1782,13 @@
     "@types/history" "*"
     "@types/react" "*"
 
+"@types/react-native@*":
+  version "0.63.2"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.63.2.tgz#428a4d71351ccbc31ab170b5f32477c7ce78dfd7"
+  integrity sha512-oxbp084lUsZvwfdWmWxKjJAuqEraQDRf+cE/JgwmrHQMguSrmgIHZ3xkeoQ5FYnW5NHIPpHudB3BbjL1Zn3vnA==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react@*":
   version "16.9.41"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.41.tgz#925137ee4d2ff406a0ecf29e8e9237390844002e"
@@ -1789,6 +1804,16 @@
   dependencies:
     "@types/glob" "*"
     "@types/node" "*"
+
+"@types/styled-components@^5.1.1":
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/@types/styled-components/-/styled-components-5.1.1.tgz#17c3b3a299aa38254189e04a72a8ee009a22e42d"
+  integrity sha512-fIjKvDU1LJExBZWEQilHqzfpOK4KUwBsj5zC79lxa94ekz8oDQSBNcayMACBImxIuevF+NbBGL9O/2CQ67Zhig==
+  dependencies:
+    "@types/hoist-non-react-statics" "*"
+    "@types/react" "*"
+    "@types/react-native" "*"
+    csstype "^2.2.0"
 
 "@types/tmp@^0.0.33":
   version "0.0.33"
@@ -2060,6 +2085,19 @@
   dependencies:
     "@babel/runtime" "^7.8.4"
 
+"@zendeskgarden/css-bedrock@^8.0.1":
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/@zendeskgarden/css-bedrock/-/css-bedrock-8.0.1.tgz#3810ed52b0542b8976c27e766b57b48720a25d97"
+  integrity sha512-VbtJHzwdTjlpxqexzZTiaNTYQ5/xdQkALp01fDudC9NgL5KueehTi8VW64cYCi1NoCJvGrKXzaey9aSRBYPepA==
+  dependencies:
+    "@zendeskgarden/css-variables" "^6.4.5"
+    normalize.css "^8.0.0"
+
+"@zendeskgarden/css-variables@^6.4.5":
+  version "6.4.5"
+  resolved "https://registry.yarnpkg.com/@zendeskgarden/css-variables/-/css-variables-6.4.5.tgz#b51a50046f42a11b8d1bfec46e100b02fd6fc1d9"
+  integrity sha512-vX7vDJVQoyYFUshYXXX5QE2fL9M6K2bnxTeB2IVyEIaGRYEi20xjoY6cuO1uAQ7RaIRGCSyZFKgWW+/IrlQMKg==
+
 "@zendeskgarden/react-buttons@^8.16.0":
   version "8.16.0"
   resolved "https://registry.yarnpkg.com/@zendeskgarden/react-buttons/-/react-buttons-8.16.0.tgz#ef755bffcb5ffc48b3989f13192d7796dd0655e4"
@@ -2076,6 +2114,13 @@
   dependencies:
     "@zendeskgarden/container-focusvisible" "^0.4.3"
     "@zendeskgarden/container-utilities" "^0.5.1"
+    polished "^3.5.1"
+
+"@zendeskgarden/react-typography@^8.17.0":
+  version "8.17.0"
+  resolved "https://registry.yarnpkg.com/@zendeskgarden/react-typography/-/react-typography-8.17.0.tgz#341f42d0d508b88e8d96e3021a59053cf743db6a"
+  integrity sha512-56VkGPf/fivIhbW3sLt9xUn09BTA2PjS5dECnAmlPPLt/TqAeqKLiHgavcdAwhBe8OIK3YZMVs9++vxqxeXf1Q==
+  dependencies:
     polished "^3.5.1"
 
 accepts@^1.3.7, accepts@~1.3.4, accepts@~1.3.5, accepts@~1.3.7:
@@ -9330,6 +9375,11 @@ normalize-url@^4.1.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/normalize-url/-/normalize-url-4.5.0.tgz#453354087e6ca96957bd8f5baf753f5982142129"
   integrity sha512-2s47yzUxdexf1OhyRi4Em83iQk0aPvwTddtFz4hnSSw9dCEsLEGf6SwIO8ss/19S9iBb5sJaOuTvTGDeZI00BQ==
+
+normalize.css@^8.0.0:
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/normalize.css/-/normalize.css-8.0.1.tgz#9b98a208738b9cc2634caacbc42d131c97487bf3"
+  integrity sha512-qizSNPO93t1YUuUhP22btGOo3chcvDFqFaj2TRybP0DMxkHOCTYwp3n34fel4a31ORXy4m1Xq0Gyqpb5m33qIg==
 
 npm-conf@^1.1.0:
   version "1.1.3"

@@ -1,7 +1,13 @@
 import React from "react"
+import { Paragraph, XXXL } from "@zendeskgarden/react-typography"
 
-const Installation = React.memo(() => {
-  return <div>Installation</div>
-})
+import { DocumentationSection } from "../../../components/documentation"
+
+const Installation = React.memo(() => (
+  <DocumentationSection>
+    <XXXL>Installation</XXXL>
+    <Paragraph>Hello</Paragraph>
+  </DocumentationSection>
+))
 
 export default Installation
