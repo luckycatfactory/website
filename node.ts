@@ -36,6 +36,7 @@ exports.createPages = async ({ actions, graphql }) => {
 
   projects.forEach(project => {
     actions.createPage({
+      context: { projectConfiguration: project },
       component: require.resolve(
         `./src/documentation/${project.name}/about/overview.tsx`
       ),
@@ -44,6 +45,7 @@ exports.createPages = async ({ actions, graphql }) => {
     project.documentation.sectionGroups.forEach(sectionGroup => {
       sectionGroup.sections.forEach(section => {
         actions.createPage({
+          context: { projectConfiguration: project },
           component: require.resolve(
             `./src/documentation/${project.name}/${titleToPath(
               sectionGroup.title
@@ -55,15 +57,3 @@ exports.createPages = async ({ actions, graphql }) => {
     })
   })
 }
-
-// exports.onCreatePage = async ({ actions, page }) => {
-//   const { createPage } = actions
-
-//   if (page.path.startsWith("/projects/")) {
-//     page.context.layout = "documentation"
-//     createPage(page)
-//   } else {
-//     page.context.layout = "normal"
-//     createPage(page)
-//   }
-// }

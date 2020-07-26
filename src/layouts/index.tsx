@@ -9,19 +9,16 @@ import React from "react"
 import { ThemeProvider, DEFAULT_THEME } from "@zendeskgarden/react-theming"
 import { useStaticQuery, graphql } from "gatsby"
 
+import { ProjectConfiguration } from "../types"
 import DocumentationLayout from "./documentation"
 import Header from "../components/header"
 import Footer from "../components/footer"
-import { LayoutType } from "./types"
 import "./layout.css"
 
 interface LayoutProps {
   readonly children: any
-  readonly location: {
-    readonly pathname: string
-  }
   readonly pageContext: {
-    readonly layout: LayoutType
+    readonly projectConfiguration: ProjectConfiguration
   }
 }
 
@@ -36,24 +33,27 @@ const titleQuery = graphql`
 `
 
 const Layout = React.memo<LayoutProps>(
-  ({ children, location: { pathname }, pageContext }) => {
-    const data = useStaticQuery(titleQuery)
-    const { layout } = pageContext
-    const isDocumentation = layout === LayoutType.documentation
+  ({ children, pageContext: { projectConfiguration } }) => {
+    const {
+      site: {
+        siteMetadata: { title },
+      },
+    } = useStaticQuery(titleQuery)
+    const isProject = Boolean(projectConfiguration)
 
-    console.log("***", isDocumentation, layout)
-
-    const mainToRender = isDocumentation ? (
-      <DocumentationLayout pathname={pathname}>
+    const mainToRender = isProject ? (
+      <DocumentationLayout projectConfiguration={projectConfiguration}>
         <main>{children}</main>
       </DocumentationLayout>
     ) : (
       <main>{children}</main>
     )
 
+    const siteTitleToUse = isProject ? projectConfiguration.name : title
+
     return (
       <ThemeProvider>
-        <Header siteTitle={data.site.siteMetadata.title} />
+        <Header siteTitle={siteTitleToUse} />
         {mainToRender}
         <Footer />
       </ThemeProvider>

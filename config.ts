@@ -1,48 +1,13 @@
 import {
-  AnySection,
-  AnySectionGroup,
   AboutSectionType,
   CommunitySectionType,
   DocumentationConfiguration,
   ExamplesSectionType,
+  ProjectConfiguration,
   RecipesSectionType,
   SectionGroupType,
   UsageSectionType,
 } from "./src/types"
-
-// const expandDocumentationPaths = (
-//   rawDocumentationConfiguration: DocumentationConfiguration
-// ): DocumentationConfiguration => {
-//   const sectionGroups: AnySectionGroup[] =
-//     rawDocumentationConfiguration.sectionGroups
-//   return {
-//     ...rawDocumentationConfiguration,
-//     sectionGroups: sectionGroups.map(rawSectionGroup => {
-//       const sections: AnySection[] = rawSectionGroup.sections
-
-//       return {
-//         ...rawSectionGroup,
-//         sections: sections.map(rawSection => ({
-//           ...rawSection,
-//           path: `${rawDocumentationConfiguration.path}${rawSection.path}`,
-//         })),
-//       }
-//     }),
-//   }
-// }
-
-// const documentation: DocumentationConfiguration = expandDocumentationPaths()
-interface Package {
-  readonly name: string
-  readonly packageUrl: string
-}
-
-interface Project {
-  readonly description: string
-  readonly documentation: DocumentationConfiguration
-  readonly name: string
-  readonly packages: Package[]
-}
 
 const poolTimeDocumentation: DocumentationConfiguration = {
   path: "/pool-time",
@@ -120,7 +85,7 @@ const poolTimeDocumentation: DocumentationConfiguration = {
   ],
 }
 
-const poolTimeProject: Project = {
+const poolTimeProject: ProjectConfiguration = {
   description:
     "A declarative relative time management system meant to make applications more performant, accurate, and intentional in their time updates.",
   documentation: poolTimeDocumentation,
@@ -215,7 +180,7 @@ const reduxPerformanceMiddlewareDocumentation: DocumentationConfiguration = {
   ],
 }
 
-const reduxPerformanceMiddleware: Project = {
+const reduxPerformanceMiddleware: ProjectConfiguration = {
   description:
     "A simple, lightweight package for measuring your application's Redux performance.",
   documentation: reduxPerformanceMiddlewareDocumentation,
