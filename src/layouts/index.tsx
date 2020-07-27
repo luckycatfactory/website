@@ -1,11 +1,4 @@
-/**
- * Layout component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
- */
-
-import React from "react"
+import React, { useCallback, useState } from "react"
 import { ThemeProvider, DEFAULT_THEME } from "@zendeskgarden/react-theming"
 import { useStaticQuery, graphql } from "gatsby"
 import styled from "styled-components"
@@ -46,10 +39,12 @@ const InnerContainer = styled.div`
 
 const StyledMain = styled.main`
   flex: 1;
+  padding: 0 16px;
 `
 
 const Layout = React.memo<LayoutProps>(
   ({ children, pageContext: { projectConfiguration } }) => {
+    const [isMobileNavigationOpen, setIsMobileNavigationOpen] = useState(false)
     const {
       site: {
         siteMetadata: { title },
@@ -57,8 +52,16 @@ const Layout = React.memo<LayoutProps>(
     } = useStaticQuery(titleQuery)
     const isProject = Boolean(projectConfiguration)
 
+    const handleMobileNavigationToggle = useCallback(() => {
+      setIsMobileNavigationOpen(previousOpen => !previousOpen)
+    }, [])
+
     const mainToRender = isProject ? (
-      <DocumentationLayout projectConfiguration={projectConfiguration}>
+      <DocumentationLayout
+        onMobileNavigationToggle={handleMobileNavigationToggle}
+        isMobileNavigationOpen={isMobileNavigationOpen}
+        projectConfiguration={projectConfiguration}
+      >
         <StyledMain>{children}</StyledMain>
       </DocumentationLayout>
     ) : (
@@ -73,7 +76,12 @@ const Layout = React.memo<LayoutProps>(
       <ThemeProvider theme={DEFAULT_THEME}>
         <OuterContainer>
           <InnerContainer>
-            <Header siteTitle={siteTitleToUse} to={headerTo} />
+            <Header
+              isProject={isProject}
+              siteTitle={siteTitleToUse}
+              to={headerTo}
+              onMobileNavigationToggle={handleMobileNavigationToggle}
+            />
           </InnerContainer>
         </OuterContainer>
         <OuterContainer>
